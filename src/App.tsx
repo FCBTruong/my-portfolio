@@ -51,7 +51,7 @@ const PROJECTS: Project[] = [
     tech: ["Godot", "Python"],
     youtubeId: "5WXr3NAkn3o",
     githubUrl: "https://github.com/FCBTruong/tressette/",
-    downloadUrl: "https://yourlink.com/tactical-arena",
+    downloadUrl: "https://tressette.clareentertainment.com/",
   },
 ];
 
@@ -125,7 +125,6 @@ function HomePage() {
           <a className="brand" href="#/">
             <span>Portfolio</span>
           </a>
-
           <nav className="nav">
             <a className="navLink" href="#projects">
               Projects
@@ -138,15 +137,15 @@ function HomePage() {
       </header>
 
       <main className="container main">
-       <section className="intro" id="top" style={{ marginBottom: "48px" }}>
+       <section className="intro" id="top" style={{ marginBottom: "40px" }}>
           <h1 className="h3">
             Hi, I&apos;m <span className="accent">Truong</span>
           </h1>
           <p className="summary">
-            Focused on clean architecture, shipping mindset, and measurable performance. Comfortable across gameplay,
-            systems, and engine-facing work.
+            I’m a game developer with 4 years of experience in the video game industry, mainly working on online multiplayer games. I enjoy collaborating with international teams and building features that players interact with every day.
+             My goal is to help create great game experiences for players all around the world, and I’m open to relocation.
           </p>
-        </section>
+       </section>
 
        <section
           id="projects"
@@ -203,7 +202,7 @@ function HomePage() {
 
       <footer className="footer">
         <div className="container footerInner">
-          <span className="muted">© {new Date().getFullYear()} Your Name</span>
+          <span className="muted">© {new Date().getFullYear()} Nguyen Huy Truong</span>
           <span className="muted">React + TypeScript (Vite)</span>
         </div>
       </footer>
@@ -323,8 +322,8 @@ a{ color:inherit; text-decoration:none; }
   margin: 10px 0 0;
   color: var(--muted);
   line-height: 1.8;
-  font-size: 15.5px;
-  max-width: 78ch;
+  font-size: 17.5px;
+  max-width: 90ch;
 }
 
 .actions{
@@ -438,7 +437,7 @@ a{ color:inherit; text-decoration:none; }
   margin: 10px 0 0;
   color: var(--muted);
   line-height: 1.75;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .tech{
