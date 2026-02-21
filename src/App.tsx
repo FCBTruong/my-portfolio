@@ -25,10 +25,16 @@ type Project = {
   role?: string;
   description: string;
   tech?: string[];
-  youtubeId: string;
+  previewMp4?: string; // Prefer MP4 if available
+  previewGif?: string; // Fallback
+  youtubeUrl?: string;
   githubUrl?: string;
   downloadUrl?: string;
+  screenshots?: string[];
 };
+
+const baseUrl = import.meta.env.BASE_URL;
+const asset = (p: string) => `${baseUrl}${p.replace(/^\/+/, "")}`;
 
 const PROJECTS: Project[] = [
   {
@@ -36,22 +42,91 @@ const PROJECTS: Project[] = [
     title: "FPS Zombie Multiplayer",
     role: "",
     description:
-      "Fast-paced runner prototype with performance-friendly VFX and clean gameplay architecture.",
-    tech: ["Unreal Engine 5", "C++", ".NET"],
-    youtubeId: "dQw4w9WgXcQ",
+      "Online FPS game with Spike, Zombie, and Deathmatch modes.",
+    tech: ["UE 5", "C++", ".NET"],
+    previewMp4: "", // <-- add if you have MP4
+    previewGif: "",
+    youtubeUrl: "https://youtu.be/dQw4w9WgXcQ",
     githubUrl: "https://github.com/FCBTruong/fps-zombie-multiplayer",
     downloadUrl: "https://yourlink.com/neon-runner",
+    screenshots: [asset("/screenshots/fps/1.png"), asset("/screenshots/fps/2.png")],
   },
   {
     id: "p2",
-    title: "Tressette",
+    title: "Tressette Royal",
     role: "",
     description:
-      "Turn-based tactics prototype with deterministic simulation and tooling for rapid iteration.",
+      "An online, turn-based multiplayer card game.",
     tech: ["Godot", "Python"],
-    youtubeId: "5WXr3NAkn3o",
+    previewMp4: asset("/videos/tressette.mp4"), // <-- add if available
+    previewGif: "",
+    youtubeUrl: "https://youtu.be/zKZ15l_08L4",
     githubUrl: "https://github.com/FCBTruong/tressette/",
     downloadUrl: "https://tressette.clareentertainment.com/",
+    screenshots: [
+      asset("/screenshots/tressette/1.png"),
+      asset("/screenshots/tressette/2.png"),
+      asset("/screenshots/tressette/3.png"),
+    ],
+  },
+  {
+    id: "p3",
+    title: "Thoi Loan Online",
+    role: "",
+    description:
+      "Fresher training project at VNG: developed a fully featured Clash of Clans-style game remake, including core codebase, architecture, gameplay systems, and balancing/polishing.",
+    tech: ["Cocos"],
+    previewMp4: asset("/videos/thoiloan.mp4"), // <-- add if available
+    previewGif: "",
+    youtubeUrl: "https://youtu.be/kkiejixeQr0",
+    githubUrl: "",
+    downloadUrl: "",
+    screenshots: [
+      asset("/screenshots/thoiloan/1.png"),
+      asset("/screenshots/thoiloan/2.png"),
+      asset("/screenshots/thoiloan/3.png"),
+    ],
+  },
+  {
+    id: "p4",
+    title: "Tower Defense",
+    role: "",
+    description:
+      "A Tower Defense game where players strategically place towers to defend against waves of enemies.",
+    tech: ["LibGDX", "Java"],
+    previewMp4: asset("/videos/defense.mp4"), // <-- add if available
+    previewGif: "",
+    youtubeUrl: "https://youtu.be/f_LjY2B8enk",
+    githubUrl: "https://github.com/FCBTruong/tower_defense_game",
+    downloadUrl:
+      "https://drive.google.com/file/d/19q84ZlyNqOVZZZzH24mDap18oo8_kEdI/view?usp=drive_link",
+  },
+  {
+    id: "p5",
+    title: "2048 Puzzle",
+    role: "",
+    description:
+      "A simple 2048 puzzle game focused on core tile movement and merging logic.",
+    tech: ["C++"],
+    previewMp4: asset("/videos/2048.mp4"), // <-- add if available
+    previewGif: "",
+    youtubeUrl: "https://youtu.be/_1QW8wA5rz0",
+    githubUrl: "https://github.com/FCBTruong/game-2048-cpp",
+    downloadUrl:
+      "https://drive.google.com/file/d/1vlW6E9IuX5oEf8YZvksmCS5h1mi8T0QS/view?usp=drive_link",
+  },
+  {
+    id: "p6",
+    title: "Sleepy Bat",
+    role: "",
+    description:
+      "A simple endless runner game where players control a bat navigating through obstacles.",
+    tech: ["Unity", "C#"],
+    previewMp4: asset("/videos/bat.mp4"), // <-- add if available
+    previewGif: "",
+    youtubeUrl: "https://youtu.be/2woaTfKqtQY",
+    githubUrl: "https://github.com/FCBTruong/FlyBat3D",
+    downloadUrl: "",
   },
 ];
 
@@ -62,11 +137,13 @@ function getRoute() {
 
 function useHashRoute() {
   const [route, setRoute] = React.useState<"home" | "cv">(getRoute());
+
   React.useEffect(() => {
     const onHashChange = () => setRoute(getRoute());
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
+
   return route;
 }
 
@@ -75,17 +152,52 @@ function navigateTo(hash: "#/" | "#/cv") {
   window.location.hash = hash;
 }
 
-function YouTubeEmbed({ youtubeId, title }: { youtubeId: string; title: string }) {
-  const src = `https://www.youtube.com/embed/${youtubeId}?rel=0`;
+function ProjectPreview({
+  title,
+  previewMp4,
+  previewGif,
+  youtubeUrl,
+}: {
+  title: string;
+  previewMp4?: string;
+  previewGif?: string;
+  youtubeUrl?: string;
+}) {
   return (
-    <div className="ratio">
-      <iframe
-        src={src}
-        title={title}
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
+    <div className="previewCard">
+      {previewMp4 ? (
+        <video
+          className="previewMedia"
+          src={previewMp4}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-label={`${title} preview video`}
+        />
+      ) : previewGif ? (
+        <img
+          src={previewGif}
+          alt={`${title} preview`}
+          className="previewMedia"
+          loading="lazy"
+        />
+      ) : (
+        <div className="previewPlaceholder">No preview</div>
+      )}
+
+      {youtubeUrl ? (
+        <a
+          className="previewOverlayBtn"
+          href={youtubeUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Watch full demo of ${title}`}
+        >
+          Watch Full Demo
+        </a>
+      ) : null}
     </div>
   );
 }
@@ -129,28 +241,28 @@ function HomePage() {
             <a className="navLink" href="#projects">
               Projects
             </a>
-            <button className="navLinkBtn" onClick={() => navigateTo("#/cv")} type="button">
+            <a href="./cv.pdf" download className="navLinkBtn">
               CV
-            </button>
+            </a>
           </nav>
         </div>
       </header>
 
       <main className="container main">
-       <section className="intro" id="top" style={{ marginBottom: "40px" }}>
+        <section className="intro" id="top" style={{ marginBottom: "20px" }}>
           <h1 className="h3">
             Hi, I&apos;m <span className="accent">Truong</span>
           </h1>
           <p className="summary">
-            I’m a game developer with 4 years of experience in the video game industry, mainly working on online multiplayer games. I enjoy collaborating with international teams and building features that players interact with every day.
-             My goal is to help create great game experiences for players all around the world, and I’m open to relocation.
+            I work on online multiplayer games and I&apos;m also an active player.
+            That player perspective shapes how I think about gameplay and overall
+            experience. I know great games aren&apos;t built alone, and I&apos;m looking
+            to work with a passionate team where I can fully contribute and grow
+            together to create meaningful experiences for players around the world.
           </p>
-       </section>
+        </section>
 
-       <section
-          id="projects"
-          className="projects"
-        >
+        <section id="projects" className="projects">
           <div className="sectionHead">
             <h2 className="h3">Projects</h2>
           </div>
@@ -159,7 +271,12 @@ function HomePage() {
             {PROJECTS.map((p) => (
               <div key={p.id} className="projectItem">
                 <div className="projectMedia">
-                  <YouTubeEmbed youtubeId={p.youtubeId} title={`${p.title} video`} />
+                  <ProjectPreview
+                    title={p.title}
+                    previewMp4={p.previewMp4}
+                    previewGif={p.previewGif}
+                    youtubeUrl={p.youtubeUrl}
+                  />
                 </div>
 
                 <div className="projectInfo">
@@ -182,18 +299,42 @@ function HomePage() {
 
                   <div className="projectActions">
                     {p.githubUrl ? (
-                         <a className="btn btnIcon" href={p.githubUrl} target="_blank" rel="noreferrer">
+                      <a
+                        className="btn btnIcon"
+                        href={p.githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <GitHubIcon />
                         GitHub
                       </a>
                     ) : null}
+
                     {p.downloadUrl ? (
-                      <a className="btn primary" href={p.downloadUrl} target="_blank" rel="noreferrer">
+                      <a
+                        className="btn primary"
+                        href={p.downloadUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         Download / Play
                       </a>
                     ) : null}
                   </div>
                 </div>
+
+                {p.screenshots?.length ? (
+                  <div className="screenshots fill3">
+                    {p.screenshots.slice(0, 3).map((src, i) => (
+                      <img
+                        key={i}
+                        src={src}
+                        alt={`${p.title} screenshot ${i + 1}`}
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
+                ) : null}
               </div>
             ))}
           </div>
@@ -224,10 +365,10 @@ const styles = `
 :root{
   --bg: #f5f6f8;
   --surface: #ffffff;
-  --text: #111827;     /* slate-900 */
-  --muted: #6b7280;    /* slate-500 */
-  --border: #e5e7eb;   /* gray-200 */
-  --accent: #111827;   /* keep monochrome */
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --accent: #111827;
   --focus: 0 0 0 3px rgba(17,24,39,0.18);
 }
 
@@ -292,51 +433,22 @@ a{ color:inherit; text-decoration:none; }
 .navLinkBtn:hover{ color: var(--text); background: rgba(17,24,39,0.05); }
 .navLinkBtn:focus-visible{ outline:none; box-shadow: var(--focus); }
 
-.badge{
-  display:inline-flex;
-  align-items:center;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 650;
-  color: var(--muted);
-  background: var(--surface);
-  border: 1px solid var(--border);
-}
-
-.h1{
-  margin: 10px 0 6px;
-  font-size: clamp(28px, 4vw, 42px);
-  line-height: 1.12;
-  letter-spacing: -0.4px;
-}
+.h3{ margin:0; font-size: 18px; }
 .accent{ color: var(--accent); }
 
-.subtitle{
-  margin:0;
-  font-weight: 650;
-  color: var(--text);
-  max-width: 74ch;
-}
 .summary{
   margin: 10px 0 0;
   color: var(--muted);
-  line-height: 1.8;
-  font-size: 17.5px;
+  line-height: 1.5;
+  font-size: 19.5px;
   max-width: 90ch;
-}
-
-.actions{
-  margin-top: 14px;
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
 }
 
 .btn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
+  gap: 8px;
   padding: 10px 12px;
   border-radius: 12px;
   border: 1px solid var(--border);
@@ -355,26 +467,7 @@ a{ color:inherit; text-decoration:none; }
   color: #fff;
 }
 .primary:hover{
-  background: #000;        /* stronger contrast */
-}
-
-.links{
-  margin-top: 14px;
-  display:flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  color: var(--muted);
-}
-.link{
-  color: var(--text);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.link:hover{ opacity: 0.85; }
-.sep{
-  width:4px; height:4px; border-radius:50%;
-  background: var(--border);
-  align-self:center;
+  background: #000;
 }
 
 .projects{ display:grid; gap: 12px; }
@@ -385,8 +478,6 @@ a{ color:inherit; text-decoration:none; }
   gap:12px;
   flex-wrap:wrap;
 }
-.h2{ margin:0; font-size: 22px; }
-.h3{ margin:0; font-size: 18px; }
 .muted{ color: var(--muted); }
 
 .projectList{
@@ -414,8 +505,52 @@ a{ color:inherit; text-decoration:none; }
   background: #fafafa;
 }
 
-.ratio{ position: relative; width:100%; padding-top: 56.25%; }
-.ratio iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.previewCard{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.previewMedia{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.previewPlaceholder{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 14px;
+  background: #f9fafb;
+}
+
+.previewOverlayBtn{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(17,24,39,0.78);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 650;
+  backdrop-filter: blur(6px);
+}
+
+.previewOverlayBtn:hover{
+  background: rgba(17,24,39,0.92);
+}
 
 .projectTitleRow{
   display:flex;
@@ -463,6 +598,10 @@ a{ color:inherit; text-decoration:none; }
   flex-wrap: wrap;
 }
 
+.btnIcon svg{
+  flex-shrink: 0;
+}
+
 .footer{
   margin-top:auto;
   border-top: 1px solid var(--border);
@@ -485,6 +624,22 @@ a{ color:inherit; text-decoration:none; }
   border: 1px solid var(--border);
   border-radius: 14px;
   background: var(--surface);
+}
+
+.screenshots.fill3{
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.screenshots.fill3 img{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fafafa;
 }
 
 @media (max-width: 920px){
