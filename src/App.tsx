@@ -39,10 +39,10 @@ const asset = (p: string) => `${baseUrl}${p.replace(/^\/+/, "")}`;
 const PROJECTS: Project[] = [
   {
     id: "p1",
-    title: "FPS Zombie Multiplayer",
+    title: "FPS Zombie Online",
     role: "",
     description:
-      "Online FPS game with Spike, Zombie, and Deathmatch modes.",
+      "Multiplayer shooting FPS game with Spike, Zombie, and Deathmatch modes.",
     tech: ["UE 5", "C++", ".NET"],
     previewMp4: "", // <-- add if you have MP4
     previewGif: "",
@@ -53,7 +53,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "p2",
-    title: "Tressette Royal",
+    title: "Tressette Royal Online",
     role: "",
     description:
       "An online, turn-based multiplayer card game.",
@@ -64,9 +64,9 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/FCBTruong/tressette/",
     downloadUrl: "https://tressette.clareentertainment.com/",
     screenshots: [
-      asset("/screenshots/tressette/1.png"),
-      asset("/screenshots/tressette/2.png"),
-      asset("/screenshots/tressette/3.png"),
+      asset("/screenshots/tressette/1.jpg"),
+      asset("/screenshots/tressette/2.jpg"),
+      asset("/screenshots/tressette/3.jpg"),
     ],
   },
   {
@@ -82,9 +82,9 @@ const PROJECTS: Project[] = [
     githubUrl: "",
     downloadUrl: "",
     screenshots: [
-      asset("/screenshots/thoiloan/1.png"),
-      asset("/screenshots/thoiloan/2.png"),
-      asset("/screenshots/thoiloan/3.png"),
+      asset("/screenshots/thoiloan/1.jpg"),
+      asset("/screenshots/thoiloan/2.jpg"),
+      asset("/screenshots/thoiloan/3.jpg"),
     ],
   },
   {
