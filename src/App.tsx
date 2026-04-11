@@ -71,7 +71,7 @@ const PROJECTS: Project[] = [
     title: "Tressette Royal Online",
     role: "",
     description: "An online, turn-based multiplayer card game.",
-    tech: ["Godot", "Python"],
+    tech: ["Godot", "Python", "C++"],
     previewMp4: asset("/videos/tressette.mp4"),
     previewGif: "",
     youtubeUrl: "https://youtu.be/zKZ15l_08L4",
@@ -252,7 +252,7 @@ function CvPage({
   theme: Theme;
   onToggleTheme: () => void;
 }) {
-  const cvUrl = "/NGUYENHUYTRUONG_SE.pdf#toolbar=0";
+  const cvUrl = "/NGUYEN_HUY_TRUONG_GE_VNG.pdf#toolbar=0";
 
   return (
     <div className="cvPage">
