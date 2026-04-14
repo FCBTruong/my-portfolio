@@ -22,7 +22,7 @@ export function CvPage({ theme, onToggleTheme }: CvPageProps) {
           </button>
 
           <div className="brand">
-            <span>Resume</span>
+            <span>Résumé</span>
           </div>
 
           <div className="rightActions">

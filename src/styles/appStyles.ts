@@ -18,6 +18,11 @@ export const styles = `
 
   --pattern-line: rgba(16, 24, 40, 0.05);
   --pattern-dot: rgba(16, 24, 40, 0.06);
+  --project-card-bg: rgba(241, 245, 253, 0.9);
+  --project-card-pattern: rgba(79, 70, 229, 0.04);
+  --career-card-bg: rgba(248, 250, 254, 0.95);
+  --career-card-pattern: rgba(79, 70, 229, 0.03);
+  --career-accent: #2563eb;
 
   --shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
   --focus: 0 0 0 3px rgba(79, 70, 229, 0.20);
@@ -39,6 +44,11 @@ export const styles = `
 
   --pattern-line: rgba(148, 163, 184, 0.08);
   --pattern-dot: rgba(148, 163, 184, 0.10);
+  --project-card-bg: rgba(17, 26, 43, 0.82);
+  --project-card-pattern: rgba(34, 211, 238, 0.035);
+  --career-card-bg: rgba(16, 24, 39, 0.86);
+  --career-card-pattern: rgba(34, 211, 238, 0.045);
+  --career-accent: #38bdf8;
 
   --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   --focus: 0 0 0 3px rgba(34, 211, 238, 0.20);
@@ -49,6 +59,7 @@ export const styles = `
 *{ box-sizing: border-box; }
 
 html, body, #root{
+  height: 100%;
   min-height: 100%;
 }
 
@@ -61,21 +72,11 @@ body{
   font-family: var(--font-body);
   color: var(--text);
   background-color: var(--bg);
-  background-image:
-    radial-gradient(circle at 1px 1px,
-      color-mix(in srgb, var(--text) 6%, transparent) 1px,
-      transparent 0),
-    radial-gradient(1600px 900px at 50% -20%,
-      color-mix(in srgb, var(--accent) 14%, transparent),
-      transparent 72%),
-    linear-gradient(165deg,
-      color-mix(in srgb, var(--bg) 90%, var(--accent) 10%) 0%,
-      var(--bg) 45%,
-      color-mix(in srgb, var(--bg) 88%, var(--accent-2) 12%) 100%);
-  background-size: 18px 18px, 100% 100%, 100% 100%;
-  background-position: 0 0, center top, center;
-  background-repeat: repeat, no-repeat, no-repeat;
-  background-attachment: fixed, fixed, fixed;
+  background-image: radial-gradient(circle at 1px 1px,
+    color-mix(in srgb, var(--text) 6%, transparent) 1px,
+    transparent 0);
+  background-size: 18px 18px;
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -184,7 +185,7 @@ button{
 .page{
   position: relative;
   z-index: 1;
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -195,13 +196,41 @@ button{
   gap: 28px;
 }
 
+@keyframes revealUp{
+  from{
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+    filter: blur(3px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes revealRight{
+  from{
+    opacity: 0;
+    transform: translateX(-18px);
+    filter: blur(2px);
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
 .topbar{
   position: sticky;
   top: 0;
   z-index: 10;
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-solid) 88%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+  box-shadow: 0 2px 16px color-mix(in srgb, var(--accent) 6%, transparent);
   overflow: hidden;
 }
 
@@ -213,6 +242,7 @@ button{
   justify-content: space-between;
   padding: 14px 0;
   gap: 10px;
+  animation: revealRight 600ms cubic-bezier(.2,.8,.2,1) 60ms both;
 }
 
 .topbarScene{
@@ -472,6 +502,54 @@ button{
   box-shadow: var(--focus);
 }
 
+.navTabBtn{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.navTabBtn:hover{
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.navTabBtn.active{
+  color: var(--text);
+}
+
+.navTabUnderline{
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 2px;
+  display: block;
+  height: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 86%, transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: transform 520ms cubic-bezier(.2,.85,.25,1), opacity 220ms ease;
+}
+
+.navTabBtn.active .navTabUnderline{
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.navTabBtn:focus-visible{
+  outline: none;
+  box-shadow: var(--focus);
+}
+
 .h3{
   margin: 0;
   font-size: 20px;
@@ -485,17 +563,69 @@ button{
   text-transform: uppercase;
 }
 
+.tagline{
+  margin: 8px 0 6px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--text) 68%, var(--muted) 32%);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.footerQuote{
+  margin: 0 auto;
+  padding: 22px 14px 16px;
+  width: fit-content;
+  max-width: min(92vw, 720px);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--muted) 64%, var(--text) 36%);
+  font-style: italic;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.footerQuote::before,
+.footerQuote::after{
+  content: "";
+  display: block;
+  width: clamp(24px, 5vw, 48px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--career-accent) 34%, var(--border) 66%), transparent);
+}
+
 .accent{
-  color: var(--accent-2);
-  text-shadow: 0 0 18px color-mix(in srgb, var(--accent-2) 24%, transparent);
+  color: #c2440a;
+  text-shadow: 0 0 18px rgba(194, 68, 10, 0.20);
 }
 
 .summary{
-  margin: 10px 0 0;
+  margin: 4px 0 0;
   color: var(--muted);
   line-height: 1.75;
   font-size: 18px;
   max-width: 88ch;
+}
+
+.typingCursor{
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--accent-2);
+  opacity: 1;
+}
+
+.typingCursor.paused{
+  animation: typingCursorBlink 920ms steps(1, end) infinite;
+}
+
+@keyframes typingCursorBlink{
+  0%, 45%{ opacity: 1; }
+  46%, 100%{ opacity: 0; }
 }
 
 .btn{
@@ -593,16 +723,52 @@ button{
   border-top: 1px solid var(--border);
 }
 
+.projectListReveal .projectItemReveal{
+  opacity: 0;
+  animation: revealUp 600ms cubic-bezier(.18,.84,.28,1) forwards;
+}
+
+.projectListReveal .projectItemReveal:nth-child(1){ animation-delay: 60ms; }
+.projectListReveal .projectItemReveal:nth-child(2){ animation-delay: 150ms; }
+.projectListReveal .projectItemReveal:nth-child(3){ animation-delay: 240ms; }
+.projectListReveal .projectItemReveal:nth-child(4){ animation-delay: 330ms; }
+.projectListReveal .projectItemReveal:nth-child(5){ animation-delay: 420ms; }
+.projectListReveal .projectItemReveal:nth-child(6){ animation-delay: 510ms; }
+
 .projectItem{
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
   padding: 16px;
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--border) 92%, var(--text) 8%);
   border-radius: 18px;
-  background: var(--surface);
+  background: var(--project-card-bg);
   box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.projectItem::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 14%, color-mix(in srgb, white 10%, transparent) 0%, transparent 24%),
+    repeating-linear-gradient(
+      45deg,
+      var(--project-card-pattern) 0px,
+      var(--project-card-pattern) 1px,
+      transparent 1px,
+      transparent 16px
+    );
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.projectItem > *{
+  position: relative;
+  z-index: 1;
 }
 
 .projectMedia{
@@ -683,6 +849,18 @@ button{
   text-transform: uppercase;
 }
 
+.pill.year{
+  color: var(--muted);
+  border-color: color-mix(in srgb, var(--border) 60%, transparent);
+  background: color-mix(in srgb, var(--surface-solid) 65%, transparent);
+}
+
+.pill.progress{
+  color: color-mix(in srgb, var(--muted) 88%, var(--text) 12%);
+  border-color: color-mix(in srgb, #14b8a6 18%, var(--border));
+  background: color-mix(in srgb, #14b8a6 5%, var(--surface-solid) 95%);
+}
+
 .projectDesc{
   margin: 10px 0 0;
   color: var(--muted);
@@ -717,25 +895,96 @@ button{
 }
 
 .footer{
+  position: relative;
   margin-top: auto;
   border-top: 1px solid var(--border);
   background: color-mix(in srgb, var(--surface-solid) 32%, transparent);
   backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.footerLandscape{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.footerBaseAccent{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent) 38%, transparent) 30%,
+    color-mix(in srgb, var(--accent-2) 40%, transparent) 70%,
+    transparent 100%
+  );
+  opacity: 0.6;
 }
 
 .footerInner{
+  position: relative;
+  z-index: 1;
   padding: 14px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  opacity: 0;
+  animation: revealUp 700ms cubic-bezier(.2,.8,.25,1) 980ms forwards;
 }
 
 .footerLeft{
   display: inline-flex;
   align-items: center;
   gap: 8px;
+}
+
+.footerStack{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stackChip{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 24px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface-solid) 82%, transparent);
+  transition: transform 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.stackChip svg{
+  width: 14px;
+  height: 14px;
+}
+
+.stackChip.react:hover{
+  color: #61dafb;
+  border-color: color-mix(in srgb, #61dafb 44%, var(--border));
+  transform: translateY(-1px);
+}
+
+.stackChip.ts:hover{
+  color: #3178c6;
+  border-color: color-mix(in srgb, #3178c6 44%, var(--border));
+  transform: translateY(-1px);
+}
+
+.stackChip.vite:hover{
+  color: #f4b400;
+  border-color: color-mix(in srgb, #f4b400 44%, var(--border));
+  transform: translateY(-1px);
 }
 
 .socialIcon{
@@ -764,6 +1013,11 @@ button{
   background: color-mix(in srgb, #ea4335 12%, transparent);
 }
 
+.socialIcon.github:hover{
+  color: #1f6feb;
+  background: color-mix(in srgb, #1f6feb 12%, transparent);
+}
+
 .cvPage{
   position: relative;
   z-index: 1;
@@ -772,9 +1026,295 @@ button{
   flex-direction: column;
 }
 
+.careerPage{
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.careerMain{
+  padding: 24px 0 48px;
+  display: grid;
+  gap: 22px;
+}
+
+.careerIntro{
+  opacity: 0;
+  animation: revealUp 680ms cubic-bezier(.2,.8,.25,1) 110ms forwards;
+}
+
+.careerTitle{
+  font-size: clamp(24px, 4vw, 30px);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.careerSummary{
+  max-width: 72ch;
+}
+
+.careerTimeline{
+  position: relative;
+  display: grid;
+  gap: 22px;
+  padding: 40px 0 44px;
+}
+
+.careerLine{
+  position: absolute;
+  left: 143px;
+  top: 20px;
+  bottom: 38px;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--career-accent) 36%, transparent) 10%, color-mix(in srgb, var(--career-accent) 30%, transparent) 90%, transparent 100%);
+  z-index: 0;
+}
+
+.careerFlowLabel{
+  position: absolute;
+  left: 143px;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.careerFlowLabel.top{ top: 0; }
+.careerFlowLabel.bottom{ bottom: 0; }
+
+.careerItem{
+  position: relative;
+  display: grid;
+  grid-template-columns: 126px 1fr;
+  column-gap: 34px;
+  align-items: start;
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.careerItem.careerItemVisible{
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 560ms cubic-bezier(.19,.82,.28,1) var(--delay, 0ms),
+    transform 560ms cubic-bezier(.19,.82,.28,1) var(--delay, 0ms);
+}
+
+.careerDateWrap{
+  position: relative;
+  min-height: 26px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.careerDate{
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--career-accent) 68%, var(--text) 32%);
+  text-align: right;
+  padding: 0;
+  line-height: 1;
+}
+
+.careerDot{
+  position: absolute;
+  top: 8px;
+  right: -23px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--career-accent) 72%, white 28%);
+  background: var(--career-card-bg);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--career-accent) 12%, transparent);
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.3);
+  transition:
+    opacity 300ms ease calc(var(--delay, 0ms) + 280ms),
+    transform 420ms cubic-bezier(.34,1.56,.64,1) calc(var(--delay, 0ms) + 280ms);
+}
+
+.careerItem.careerItemVisible .careerDot{
+  opacity: 1;
+  transform: scale(1);
+}
+
+.careerCard{
+  position: relative;
+  z-index: 1;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 20px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--surface-solid) 94%, var(--career-accent) 6%) 0%, var(--career-card-bg) 100%);
+  box-shadow: var(--shadow);
+}
+
+.careerRole{
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.careerOrg{
+  margin: 0;
+  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
+  font-weight: 600;
+}
+
+.careerLocation{
+  margin: 2px 0 0;
+  color: color-mix(in oklab, var(--muted) 78%, var(--text) 22%);
+  font-size: 13px;
+}
+
+.careerCardSummary{
+  margin: 10px 0 8px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.careerLogo{
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  margin-bottom: 14px;
+  opacity: 0.96;
+}
+
+.careerLogoBadge{
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  color: color-mix(in srgb, var(--career-accent) 78%, white 22%);
+  filter: drop-shadow(0 6px 14px color-mix(in srgb, var(--career-accent) 18%, transparent));
+}
+
+.careerLogoBadge.selfDevelopment{
+  color: #f59e0b;
+  filter: drop-shadow(0 6px 16px rgba(245, 158, 11, 0.24));
+}
+
+.careerLogoBadge.companyFallback{
+  color: color-mix(in srgb, var(--career-accent) 84%, white 16%);
+}
+
+.careerHighlights{
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  color: var(--text);
+}
+
+.careerExtras{
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+  display: grid;
+  gap: 0;
+}
+
+.careerExtraCard{
+  padding: 14px 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.careerExtraCard + .careerExtraCard{
+  border-top: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+}
+
+.careerExtraTitle{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--career-accent) 68%, var(--text) 32%);
+  margin-bottom: 9px;
+}
+
+.careerExtraTitle svg{
+  width: 17px;
+  height: 17px;
+  opacity: 0.9;
+}
+
+.careerExtraList{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+}
+
+.careerExtraItem{
+  padding: 10px 0;
+}
+
+.careerExtraItem + .careerExtraItem{
+  border-top: 1px dashed color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.careerExtraHead{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.careerExtraItem p,
+.careerExtraItem span{
+  margin: 0;
+}
+
+.careerExtraMain{
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.careerExtraDate{
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--career-accent) 66%, var(--text) 34%);
+  font-family: var(--font-display);
+}
+
+.careerExtraSub{
+  margin-top: 3px;
+  color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
+  font-size: 14px;
+}
+
+.careerExtraMeta{
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .cvMain{
   padding: 18px 0 28px;
   flex: 1;
+  opacity: 0;
+  animation: revealUp 700ms cubic-bezier(.2,.8,.25,1) 160ms forwards;
 }
 
 .cvIframe{
@@ -875,6 +1415,19 @@ button{
   .cvIframe{
     height: calc(100vh - 72px - 28px);
   }
+
+  .careerTimeline{ padding: 36px 0 40px; }
+  .careerLine{
+    left: 115px;
+    bottom: 34px;
+  }
+  .careerFlowLabel{ left: 115px; }
+  .careerItem{
+    grid-template-columns: 102px 1fr;
+    column-gap: 26px;
+  }
+  .careerDot{ right: -19px; }
+
 }
 
 @media (max-width: 640px){
@@ -898,6 +1451,23 @@ button{
     padding: 12px;
   }
 
+  .careerTimeline{ padding-top: 20px; }
+  .careerLine,
+  .careerFlowLabel{ display: none; }
+  .careerItem{
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+  .careerDate{
+    text-align: left;
+  }
+  .careerDateWrap{
+    min-height: auto;
+    justify-content: flex-start;
+  }
+  .careerDot{ display: none; }
+  .careerCard{ padding: 12px; }
+
   .footerInner{
     flex-direction: column;
   }
@@ -907,6 +1477,41 @@ button{
 .memoryGame{
   margin-bottom: 32px;
   position: relative;
+  opacity: 0;
+  animation: revealUp 760ms cubic-bezier(.18,.84,.28,1) 180ms forwards;
+}
+
+.intro{
+  opacity: 0;
+  animation: revealUp 780ms cubic-bezier(.18,.84,.28,1) 90ms forwards;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .topbarInner,
+  .intro,
+  .memoryGame,
+  .careerIntro,
+  .careerItem,
+  .careerDot,
+  .careerCard,
+  .projects,
+  .projectItem,
+  .footerInner,
+  .cvMain{
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .typingCursor{
+    animation: none !important;
+  }
+
+  .projectListReveal .projectItemReveal{
+    animation: none !important;
+    opacity: 1 !important;
+  }
 }
 
 .memoryGameHeader{
@@ -922,7 +1527,7 @@ button{
 .memoryGameLevel{
   font-weight: 700;
   font-family: var(--font-display);
-  color: var(--accent-2);
+  color: #c2440a;
   font-size: 13px;
   margin-right: auto;
 }
@@ -966,34 +1571,55 @@ button{
 }
 
 .memoryCardBack{
+  background: color-mix(in srgb, var(--surface-2) 82%, var(--bg) 18%);
+  border: 1px solid color-mix(in srgb, var(--border) 84%, var(--accent-2) 16%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    inset 0 -4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.memoryCardBack::before{
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 6px;
   background:
-    linear-gradient(135deg,
-      color-mix(in srgb, var(--accent) 22%, var(--surface-solid)) 0%,
-      color-mix(in srgb, var(--accent-2) 18%, var(--surface-solid)) 100%
-    );
-  border: 1px solid color-mix(in srgb, var(--accent-2) 25%, transparent);
-  background-image:
     repeating-linear-gradient(
       45deg,
-      color-mix(in srgb, var(--accent-2) 8%, transparent) 0px,
-      color-mix(in srgb, var(--accent-2) 8%, transparent) 1px,
+      rgba(148, 163, 184, 0.09) 0px,
+      rgba(148, 163, 184, 0.09) 1px,
       transparent 1px,
-      transparent 10px
+      transparent 13px
     ),
     repeating-linear-gradient(
       -45deg,
-      color-mix(in srgb, var(--accent) 6%, transparent) 0px,
-      color-mix(in srgb, var(--accent) 6%, transparent) 1px,
+      rgba(15, 23, 42, 0.07) 0px,
+      rgba(15, 23, 42, 0.07) 1px,
       transparent 1px,
-      transparent 10px
+      transparent 13px
     );
-  box-shadow: inset 0 1px 0 color-mix(in srgb, white 15%, transparent);
+  opacity: 0.52;
+}
+
+.memoryCardBack::after{
+  content: none;
 }
 
 .memoryCardFront{
   transform: rotateY(180deg);
-  background: var(--surface);
-  border: 1px solid color-mix(in srgb, var(--accent-2) 35%, transparent);
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(148, 163, 184, 0.06) 0px,
+      rgba(148, 163, 184, 0.06) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    color-mix(in srgb, var(--surface) 88%, var(--bg) 12%);
+  border: 1px solid color-mix(in srgb, var(--accent-2) 22%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   display: grid;
   place-items: center;
   font-size: 22px;
@@ -1001,13 +1627,35 @@ button{
 }
 
 .memoryCard.matched .memoryCardFront{
-  background: color-mix(in srgb, var(--accent-2) 10%, var(--surface) 90%);
-  border-color: color-mix(in srgb, var(--accent-2) 45%, transparent);
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(16, 185, 129, 0.06) 0px,
+      rgba(16, 185, 129, 0.06) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    color-mix(in srgb, #10b981 10%, var(--surface) 90%);
+  border-color: color-mix(in srgb, #10b981 46%, transparent);
 }
 
 .memoryGameStat strong{
   color: var(--text);
   font-weight: 600;
+}
+
+.memoryGameStat{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.memoryGameStatIcon{
+  width: 14px;
+  height: 14px;
+  color: var(--muted);
+  flex-shrink: 0;
 }
 
 .memoryGameModalBtnSecondary{

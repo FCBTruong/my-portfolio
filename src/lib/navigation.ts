@@ -3,7 +3,9 @@ import type { Route } from "../types/portfolio";
 
 function getRoute(): Route {
   const h = window.location.hash || "#/";
-  return h.startsWith("#/cv") ? "cv" : "home";
+  if (h.startsWith("#/cv")) return "cv";
+  if (h.startsWith("#/career")) return "career";
+  return "home";
 }
 
 export function useHashRoute() {
@@ -18,7 +20,7 @@ export function useHashRoute() {
   return route;
 }
 
-export function navigateTo(hash: "#/" | "#/cv") {
+export function navigateTo(hash: "#/" | "#/cv" | "#/career") {
   if (window.location.hash === hash) return;
   window.location.hash = hash;
 }

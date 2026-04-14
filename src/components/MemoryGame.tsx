@@ -99,6 +99,10 @@ export function MemoryGame() {
     playTone(880, 0.12, "triangle", 0.04, 0.08);
   }, [playTone]);
 
+  const playFlipSound = useCallback(() => {
+    playTone(420, 0.05, "triangle", 0.018, 0);
+  }, [playTone]);
+
   const playWinSound = useCallback(() => {
     playTone(523.25, 0.16, "sine", 0.06, 0);
     playTone(659.25, 0.16, "sine", 0.06, 0.12);
@@ -215,6 +219,7 @@ export function MemoryGame() {
       if (!card || card.isFlipped || card.isMatched || locked) return;
 
       if (!started) setStarted(true);
+      playFlipSound();
 
       setCards((prev) => prev.map((c) => (c.id === id ? { ...c, isFlipped: true } : c)));
 
@@ -248,18 +253,42 @@ export function MemoryGame() {
         }, 900);
       }
     },
-    [cards, selected, locked, started, playMatchSound]
+    [cards, selected, locked, started, playFlipSound, playMatchSound]
   );
 
   const fmtTime = (s: number) =>
     `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
+  const PawIcon = () => (
+    <svg viewBox="0 0 24 24" className="memoryGameStatIcon" aria-hidden="true">
+      <path
+        d="M8.2 11.9c-1.7 0-3 1.3-3 2.9 0 2.2 2 3.9 4.5 3.9h4.6c2.5 0 4.5-1.7 4.5-3.9 0-1.6-1.3-2.9-3-2.9-.8 0-1.6.3-2.1.8l-.8.8c-.7.7-1.8.7-2.5 0l-.8-.8c-.6-.5-1.3-.8-2.2-.8Z"
+        fill="currentColor"
+      />
+      <circle cx="8" cy="7" r="1.6" fill="currentColor" />
+      <circle cx="11.2" cy="5.8" r="1.5" fill="currentColor" />
+      <circle cx="14.8" cy="5.8" r="1.5" fill="currentColor" />
+      <circle cx="18" cy="7" r="1.6" fill="currentColor" />
+    </svg>
+  );
+
+  const ClockIcon = () => (
+    <svg viewBox="0 0 24 24" className="memoryGameStatIcon" aria-hidden="true">
+      <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M12 7.8v4.8l3.2 1.8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+
   return (
     <div className="memoryGame">
       <div className="memoryGameHeader">
         <span className="memoryGameLevel">Lv {levelIdx + 1} · {level.n}×{level.n}</span>
-        <span className="memoryGameStat">Moves: <strong>{moves}</strong></span>
-        <span className="memoryGameStat">Time: <strong>{fmtTime(time)}</strong></span>
+        <span className="memoryGameStat">
+          <PawIcon /> <strong>{moves}</strong>
+        </span>
+        <span className="memoryGameStat">
+          <ClockIcon /> <strong>{fmtTime(time)}</strong>
+        </span>
       </div>
 
       <div

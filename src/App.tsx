@@ -1,5 +1,6 @@
 import React from "react";
 import { ClickRipples } from "./components/ClickRipples";
+import { CareerPage } from "./pages/CareerPage";
 import { CvPage } from "./pages/CvPage";
 import { HomePage } from "./pages/HomePage";
 import { useHashRoute } from "./lib/navigation";
@@ -26,6 +27,8 @@ export default function App() {
       <ClickRipples />
       {route === "cv" ? (
         <CvPage theme={theme} onToggleTheme={toggleTheme} />
+      ) : route === "career" ? (
+        <CareerPage theme={theme} onToggleTheme={toggleTheme} />
       ) : (
         <HomePage theme={theme} onToggleTheme={toggleTheme} />
       )}

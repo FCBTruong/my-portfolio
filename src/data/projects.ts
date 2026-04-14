@@ -4,9 +4,26 @@ const baseUrl = import.meta.env.BASE_URL;
 const asset = (p: string) => `${baseUrl}${p.replace(/^\/+/, "")}`;
 
 export const PROJECTS: Project[] = [
+   {
+    id: "p0",
+    title: "Pixel AI",
+    year: 2026,
+    role: "",
+    statusLabel: "Under Development",
+    description:
+      "A research-driven pixel game prototype focused on applying AI to generate world elements, shape map-building workflows, and explore zombie-defense gameplay ideas.",
+    tech: ["SDL 3", "C++", "Codex"],
+    previewMp4: asset("/videos/pixelai.mp4"),
+    previewGif: "",
+    youtubeUrl: "",
+    githubUrl: "https://github.com/FCBTruong/love-deaths-ai",
+    downloadUrl: "",
+    screenshots: [asset("/screenshots/pixelai/1.jpg"), asset("/screenshots/pixelai/2.jpg"), asset("/screenshots/pixelai/3.jpg")],
+  },
   {
     id: "p1",
     title: "FPS Zombie Online",
+    year: 2025,
     role: "",
     description: "Multiplayer shooting FPS game with Spike, Zombie, and Deathmatch modes.",
     tech: ["UE 5", "C++", ".NET"],
@@ -20,6 +37,7 @@ export const PROJECTS: Project[] = [
   {
     id: "p2",
     title: "Tressette Royal Online",
+    year: 2024,
     role: "",
     description: "An online, turn-based multiplayer card game.",
     tech: ["Godot", "Python", "C++"],
@@ -37,6 +55,7 @@ export const PROJECTS: Project[] = [
   {
     id: "p3",
     title: "Thoi Loan Online",
+    year: 2021,
     role: "",
     description:
       "Fresher training project at VNG: developed a fully featured Clash of Clans-style game remake, including core codebase, architecture, gameplay systems, and balancing/polishing.",
@@ -55,6 +74,7 @@ export const PROJECTS: Project[] = [
   {
     id: "p4",
     title: "Tower Defense",
+    year: 2019,
     role: "",
     description:
       "A Tower Defense game where players strategically place towers to defend against waves of enemies.",
@@ -69,9 +89,10 @@ export const PROJECTS: Project[] = [
   {
     id: "p5",
     title: "2048 Puzzle",
+    year: 2019,
     role: "",
     description: "A simple 2048 puzzle game focused on core tile movement and merging logic.",
-    tech: ["C++"],
+    tech: ["SDL", "C++"],
     previewMp4: asset("/videos/2048.mp4"),
     previewGif: "",
     youtubeUrl: "https://youtu.be/_1QW8wA5rz0",
@@ -82,6 +103,7 @@ export const PROJECTS: Project[] = [
   {
     id: "p6",
     title: "Sleepy Bat",
+    year: 2020,
     role: "",
     description:
       "A simple endless runner game where players control a bat navigating through obstacles.",

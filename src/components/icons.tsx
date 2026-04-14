@@ -39,3 +39,96 @@ export function MoonIcon() {
     </svg>
   );
 }
+
+export function BuildingIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <path d="M3 21h18" />
+      <path d="M5 21V7.5A1.5 1.5 0 0 1 6.5 6H10v15" />
+      <path d="M10 21V4.5A1.5 1.5 0 0 1 11.5 3h6A1.5 1.5 0 0 1 19 4.5V21" />
+      <path d="M7.5 9.5h.01M7.5 12.5h.01M7.5 15.5h.01M13.5 6.5h.01M16.5 6.5h.01M13.5 9.5h.01M16.5 9.5h.01M13.5 12.5h.01M16.5 12.5h.01" />
+    </svg>
+  );
+}
+
+export function SparkIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z" />
+      <path d="M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16Z" />
+    </svg>
+  );
+}
+
+export function EducationIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="m3 8.5 9-4.5 9 4.5-9 4.5-9-4.5Z" />
+      <path d="M6.5 10.8V15c0 1.5 2.4 3 5.5 3s5.5-1.5 5.5-3v-4.2" />
+    </svg>
+  );
+}
+
+export function CertificateIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M8 3h8l5 5v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" />
+      <path d="M16 3v5h5" />
+      <path d="M9.5 14h5" />
+      <path d="M9.5 17h4" />
+    </svg>
+  );
+}
+
+export function TrophyIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M8 4h8v3a4 4 0 0 1-8 0V4Z" />
+      <path d="M10 15h4" />
+      <path d="M12 11v4" />
+      <path d="M8 19h8" />
+      <path d="M16 6h2a2 2 0 0 1 0 4h-2" />
+      <path d="M8 6H6a2 2 0 0 0 0 4h2" />
+    </svg>
+  );
+}
+
+export function ReactLogoIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+      <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+      <ellipse cx="12" cy="12" rx="10" ry="4.2" />
+      <ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)" />
+      <ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)" />
+    </svg>
+  );
+}
+
+export function TypeScriptLogoIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="2.5" />
+      <path d="M9.2 9h6.1v1.8h-2.1V17h-1.9v-6.2H9.2V9Zm9.8.2v1.8c-.7-.4-1.3-.5-1.8-.5-.4 0-.8.1-1 .2-.2.1-.3.3-.3.5 0 .1.1.3.2.4.1.1.4.2.8.3l.6.1c.9.2 1.6.5 2 .9.4.4.6.9.6 1.6 0 .9-.3 1.6-1 2.1-.7.5-1.6.7-2.8.7-.5 0-1 0-1.5-.1-.5-.1-1-.2-1.6-.4v-1.9c.6.3 1.1.5 1.6.7.5.1 1 .2 1.5.2.5 0 .9-.1 1.1-.2.3-.1.4-.3.4-.6 0-.2-.1-.3-.2-.5-.1-.1-.4-.2-.9-.3l-.5-.1c-.8-.2-1.4-.5-1.8-.8-.4-.4-.6-.9-.6-1.6 0-.8.3-1.5.9-1.9.6-.5 1.5-.7 2.6-.7.4 0 .8 0 1.3.1.4.1.9.2 1.4.3Z" fill="#fff" />
+    </svg>
+  );
+}
+
+export function ViteLogoIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M22 5 13.2 20.5a1.4 1.4 0 0 1-2.4 0L2 5.1a.8.8 0 0 1 .9-1.2l8.9 1.6c.1 0 .3 0 .4 0l8.9-1.6A.8.8 0 0 1 22 5Z" fill="url(#vite-grad-a)" />
+      <path d="m16.6 2.2-4.8.9a.4.4 0 0 0-.3.3l-.3 2.5c0 .2.1.4.3.4l1.3.2c.2 0 .3.2.3.4l-.8 5.6c0 .4.5.6.8.3l.2-.3 4.3-8.7c.2-.3-.1-.7-.5-.6Z" fill="url(#vite-grad-b)" />
+      <defs>
+        <linearGradient id="vite-grad-a" x1="2" y1="4" x2="18" y2="20" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#41D1FF" />
+          <stop offset="1" stopColor="#BD34FE" />
+        </linearGradient>
+        <linearGradient id="vite-grad-b" x1="11" y1="2" x2="16" y2="13" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FFEA83" />
+          <stop offset=".5" stopColor="#FFDD35" />
+          <stop offset="1" stopColor="#FFA800" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
