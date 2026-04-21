@@ -1,0 +1,3 @@
+name = "my-portfolio-chat-proxy"
+main = "openrouter-worker.js"
+compatibility_date = "2026-04-15"

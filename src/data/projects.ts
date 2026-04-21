@@ -4,22 +4,6 @@ const baseUrl = import.meta.env.BASE_URL;
 const asset = (p: string) => `${baseUrl}${p.replace(/^\/+/, "")}`;
 
 export const PROJECTS: Project[] = [
-   {
-    id: "p0",
-    title: "Pixel AI",
-    year: 2026,
-    role: "",
-    statusLabel: "Under Development",
-    description:
-      "A research-driven pixel game prototype focused on applying AI to generate world elements, shape map-building workflows, and explore zombie-defense gameplay ideas.",
-    tech: ["SDL 3", "C++", "Codex"],
-    previewMp4: asset("/videos/pixelai.mp4"),
-    previewGif: "",
-    youtubeUrl: "",
-    githubUrl: "https://github.com/FCBTruong/love-deaths-ai",
-    downloadUrl: "",
-    screenshots: [asset("/screenshots/pixelai/1.jpg"), asset("/screenshots/pixelai/2.jpg"), asset("/screenshots/pixelai/3.jpg")],
-  },
   {
     id: "p1",
     title: "FPS Zombie Online",
@@ -51,6 +35,22 @@ export const PROJECTS: Project[] = [
       asset("/screenshots/tressette/2.jpg"),
       asset("/screenshots/tressette/3.jpg"),
     ],
+  },
+  {
+    id: "p0",
+    title: "Pixel AI",
+    year: 2026,
+    role: "",
+    statusLabel: "Under Development",
+    description:
+      "A research-driven pixel game prototype focused on applying AI to generate world elements, shape map-building workflows, and explore zombie-defense gameplay ideas.",
+    tech: ["SDL 3", "C++", "Codex"],
+    previewMp4: asset("/videos/pixelai.mp4"),
+    previewGif: "",
+    youtubeUrl: "",
+    githubUrl: "https://github.com/FCBTruong/love-deaths-ai",
+    downloadUrl: "",
+    screenshots: [asset("/screenshots/pixelai/1.jpg"), asset("/screenshots/pixelai/2.jpg"), asset("/screenshots/pixelai/3.jpg")],
   },
   {
     id: "p3",

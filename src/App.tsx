@@ -1,5 +1,6 @@
 import React from "react";
 import { ClickRipples } from "./components/ClickRipples";
+import { ChatBot } from "./components/ChatBot";
 import { CareerPage } from "./pages/CareerPage";
 import { CvPage } from "./pages/CvPage";
 import { HomePage } from "./pages/HomePage";
@@ -25,6 +26,7 @@ export default function App() {
     <>
       <style>{styles}</style>
       <ClickRipples />
+      <ChatBot />
       {route === "cv" ? (
         <CvPage theme={theme} onToggleTheme={toggleTheme} />
       ) : route === "career" ? (
