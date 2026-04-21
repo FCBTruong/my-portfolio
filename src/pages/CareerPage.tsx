@@ -4,6 +4,8 @@ import { BuildingIcon, CertificateIcon, EducationIcon, SparkIcon, TrophyIcon } f
 import { TopbarScene } from "../components/TopbarScene";
 import type { CareerMilestone, Theme } from "../types/portfolio";
 import { ThemeToggle } from "../components/ThemeToggle";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { useLanguage } from "../contexts/LanguageContext";
 import {
   CAREER_AWARDS,
   CAREER_CERTIFICATES,
@@ -17,6 +19,7 @@ type CareerPageProps = {
 };
 
 export function CareerPage({ theme, onToggleTheme }: CareerPageProps) {
+  const { tr } = useLanguage();
   const milestonesTopToBottom = [...CAREER_MILESTONES].reverse();
   const careerTimelineRef = React.useRef<HTMLElement>(null);
 
@@ -65,14 +68,15 @@ export function CareerPage({ theme, onToggleTheme }: CareerPageProps) {
         <TopbarScene />
         <div className="container topbarInner">
           <button className="btn" onClick={() => navigateTo("#/")} type="button">
-            ← Back
+            {tr.cv.back}
           </button>
 
           <div className="brand">
-            <span>Career</span>
+            <span>{tr.nav.career}</span>
           </div>
 
           <div className="rightActions">
+            <LanguageSwitcher />
             <ThemeToggle theme={theme} onToggle={onToggleTheme} />
           </div>
         </div>
@@ -88,8 +92,8 @@ export function CareerPage({ theme, onToggleTheme }: CareerPageProps) {
         </section>
 
         <section className="careerTimeline" ref={careerTimelineRef} aria-label="Career timeline">
-          <span className="careerFlowLabel top">Now</span>
-          <span className="careerFlowLabel bottom">Start</span>
+          <span className="careerFlowLabel top">{tr.career.now}</span>
+          <span className="careerFlowLabel bottom">{tr.career.start}</span>
           <span className="careerLine" aria-hidden="true" />
 
           {milestonesTopToBottom.map((item, index) => (
@@ -118,7 +122,7 @@ export function CareerPage({ theme, onToggleTheme }: CareerPageProps) {
           <article className="careerExtraCard">
             <h3 className="h3 careerExtraTitle">
               <EducationIcon />
-              Education
+              {tr.career.education}
             </h3>
             <ul className="careerExtraList">
               {CAREER_EDUCATION.map((item) => (
@@ -140,7 +144,7 @@ export function CareerPage({ theme, onToggleTheme }: CareerPageProps) {
           <article className="careerExtraCard">
             <h3 className="h3 careerExtraTitle">
               <CertificateIcon />
-              Certificates
+              {tr.career.certificates}
             </h3>
             <ul className="careerExtraList">
               {CAREER_CERTIFICATES.map((item) => (
@@ -158,7 +162,7 @@ export function CareerPage({ theme, onToggleTheme }: CareerPageProps) {
           <article className="careerExtraCard">
             <h3 className="h3 careerExtraTitle">
               <TrophyIcon />
-              Awards
+              {tr.career.awards}
             </h3>
             <ul className="careerExtraList">
               {CAREER_AWARDS.map((item) => (

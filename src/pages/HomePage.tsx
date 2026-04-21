@@ -22,20 +22,26 @@ import {
 } from "../components/icons";
 import { Lightbox } from "../components/Lightbox";
 import { ProjectPreview } from "../components/ProjectPreview";
+// import { PdfInlineViewer } from "../components/PdfInlineViewer";
+import { DownloadIcon } from "../components/DownloadIcon";
 import { TopbarScene } from "../components/TopbarScene";
 import { ThemeToggle } from "../components/ThemeToggle";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { MemoryGame } from "../components/MemoryGame";
+import { useLanguage } from "../contexts/LanguageContext";
 
 type HomePageProps = {
   theme: Theme;
   onToggleTheme: () => void;
 };
 
-type HomeTab = "about" | "projects" | "career";
+type HomeTab = "about" | "projects" | "career" | "resume";
 
 
 
 export function HomePage({ theme, onToggleTheme }: HomePageProps) {
+  const { tr, lang } = useLanguage();
+  const resumePdfUrl = `${import.meta.env.BASE_URL}NGUYEN_HUY_TRUONG_GE_VNG.pdf`;
   const [lightbox, setLightbox] = React.useState<{ src: string; alt: string } | null>(null);
   const [activeTab, setActiveTab] = React.useState<HomeTab>("about");
 
@@ -43,12 +49,19 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
     setActiveTab(tab);
   };
   const introText = React.useMemo(
-    () =>
-      "I work on online multiplayer games and I am also an active player. That player perspective shapes how I think about gameplay and overall experience. I know great games are not built alone, and I am looking to work with a passionate team where I can fully contribute and grow together. My goal is to create meaningful experiences for players around the world.",
-    []
+    () => tr.intro.body,
+    [tr]
   );
   const [typedIntro, setTypedIntro] = React.useState("");
+  const prevLangRef = React.useRef(lang);
   const [isTypingPaused, setIsTypingPaused] = React.useState(false);
+
+  React.useEffect(() => {
+    if (prevLangRef.current !== lang) {
+      prevLangRef.current = lang;
+      setTypedIntro("");
+    }
+  }, [lang]);
 
   React.useEffect(() => {
     const BASE_DELAY = 24;
@@ -140,13 +153,13 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
               {p.githubUrl ? (
                 <a className="btn btnIcon" href={p.githubUrl} target="_blank" rel="noreferrer">
                   <GitHubIcon />
-                  GitHub
+                  {tr.project.github}
                 </a>
               ) : null}
 
               {p.downloadUrl ? (
                 <a className="btn primary" href={p.downloadUrl} target="_blank" rel="noreferrer">
-                  Download / Play
+                  {tr.project.downloadPlay}
                 </a>
               ) : null}
             </div>
@@ -195,7 +208,7 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
     <div className="page">
       <header className="topbar">
         <TopbarScene />
-        <div className="container topbarInner">
+        <div className="container topbarInner homeTopbarInner">
           <a className="brand" href="#/">
             <span>Portfolio</span>
           </a>
@@ -206,7 +219,7 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
               className={`navTabBtn${activeTab === "about" ? " active" : ""}`}
               onClick={() => switchTab("about")}
             >
-              About Me
+              {tr.nav.about}
               <span className="navTabUnderline" aria-hidden="true" />
             </button>
             <button
@@ -214,7 +227,7 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
               className={`navTabBtn${activeTab === "projects" ? " active" : ""}`}
               onClick={() => switchTab("projects")}
             >
-              Projects
+              {tr.nav.projects}
               <span className="navTabUnderline" aria-hidden="true" />
             </button>
             <button
@@ -222,14 +235,23 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
               className={`navTabBtn${activeTab === "career" ? " active" : ""}`}
               onClick={() => switchTab("career")}
             >
-              Career
+              {tr.nav.career}
               <span className="navTabUnderline" aria-hidden="true" />
             </button>
-            <a href="./NGUYEN_HUY_TRUONG_GE_VNG.pdf" download className="navLinkBtn">
-              Résumé
-            </a>
-            <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+            <button
+              type="button"
+              className={`navTabBtn${activeTab === "resume" ? " active" : ""}`}
+              onClick={() => switchTab("resume")}
+            >
+              {tr.nav.resume}
+              <span className="navTabUnderline" aria-hidden="true" />
+            </button>
           </nav>
+
+          <div className="rightActions">
+            <LanguageSwitcher />
+            <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+          </div>
         </div>
       </header>
 
@@ -238,7 +260,7 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
           <section className="projects" id="top">
             <section className="intro" style={{ marginBottom: "20px" }}>
               <h1 className="h3 heroTitle">
-                Hi, I'm <span className="accent">Truong</span>
+                {tr.intro.greeting} <span className="accent">Truong</span>
               </h1>
               <p className="summary">
                 {typedIntro}
@@ -260,8 +282,8 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
         {activeTab === "career" ? (
           <section className="projects">
             <div className="careerTimeline" ref={careerTimelineRef} key="career-tab" aria-label="Career timeline">
-              <span className="careerFlowLabel top">Now</span>
-              <span className="careerFlowLabel bottom">Start</span>
+              <span className="careerFlowLabel top">{tr.career.now}</span>
+              <span className="careerFlowLabel bottom">{tr.career.start}</span>
               <span className="careerLine" aria-hidden="true" />
 
               {[...CAREER_MILESTONES].reverse().map((item, index) => (
@@ -290,7 +312,7 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
               <article className="careerExtraCard">
                 <h3 className="h3 careerExtraTitle">
                   <EducationIcon />
-                  Education
+                  {tr.career.education}
                 </h3>
                 <ul className="careerExtraList">
                   {CAREER_EDUCATION.map((item) => (
@@ -312,7 +334,7 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
               <article className="careerExtraCard">
                 <h3 className="h3 careerExtraTitle">
                   <CertificateIcon />
-                  Certificates
+                  {tr.career.certificates}
                 </h3>
                 <ul className="careerExtraList">
                   {CAREER_CERTIFICATES.map((item) => (
@@ -330,7 +352,7 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
               <article className="careerExtraCard">
                 <h3 className="h3 careerExtraTitle">
                   <TrophyIcon />
-                  Awards
+                  {tr.career.awards}
                 </h3>
                 <ul className="careerExtraList">
                   {CAREER_AWARDS.map((item) => (
@@ -347,10 +369,20 @@ export function HomePage({ theme, onToggleTheme }: HomePageProps) {
             </section>
           </section>
         ) : null}
+
+        {activeTab === "resume" ? (
+          <section className="resumeTabContent noCard">
+            <div className="resumePreviewWrap noCard" style={{display:'flex',justifyContent:'center',alignItems:'center',gap:6}}>
+              <a className="resumeDownloadBtn simple" href={resumePdfUrl} download aria-label={tr.cv.downloadPdf} title={tr.cv.downloadPdf} style={{position:'static',top:'unset',right:'unset',margin:'0 0 0 0'}}>
+                <DownloadIcon />
+                <span className="sr-only">{tr.cv.downloadPdf}</span>
+              </a>
+            </div>
+          </section>
+        ) : null}
       </main>
 
-      <p className="footerQuote">"Every small step shapes something great"</p>
-
+      <p className={`footerQuote${activeTab === "resume" ? " footerQuoteResume" : ""}`}>{tr.footer.quote}</p>
       <footer className="footer">
         <div className="footerLandscape" aria-hidden="true">
           <span className="footerBaseAccent" />

@@ -46,4 +46,6 @@ export type CareerAward = {
 
 export type Theme = "light" | "dark";
 
+export type Language = "en" | "ja" | "vi";
+
 export type Route = "home" | "cv" | "career";

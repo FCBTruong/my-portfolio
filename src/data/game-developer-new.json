@@ -1,0 +1,387 @@
+{
+  "picture": {
+    "hidden": false,
+    "url": "",
+    "size": 64,
+    "rotation": 0,
+    "aspectRatio": 1,
+    "borderRadius": 100,
+    "borderColor": "rgba(0, 0, 0, 0)",
+    "borderWidth": 0,
+    "shadowColor": "rgba(0, 0, 0, 0.5)",
+    "shadowWidth": 0
+  },
+  "basics": {
+    "name": "NGUYEN HUY TRUONG",
+    "headline": "Software Engineer | Game Development",
+    "email": "nguyenhuytruong9112k@gmail.com",
+    "phone": "",
+    "location": "Vietnam",
+    "website": {
+      "url": "",
+      "label": ""
+    },
+    "customFields": [
+      {
+        "id": "019d2799-c7e0-732f-8a40-07bf4ec97470",
+        "icon": "github-logo",
+        "text": "GitHub",
+        "link": "https://github.com/FCBTruong"
+      },
+      {
+        "id": "019bf955-324f-746a-bc49-ef8f411bc308",
+        "icon": "game-controller",
+        "text": "Portfolio",
+        "link": "https://fcbtruong.github.io/my-portfolio"
+      }
+    ]
+  },
+  "summary": {
+    "title": "Summary",
+    "columns": 1,
+    "hidden": false,
+    "content": "<p>Software engineer with 4 years of experience in game development, focusing on gameplay systems, online game features, and real-time multiplayer experiences. Experienced in building and operating live game systems, improving stability, and collaborating with cross-functional teams to deliver better game quality. Passionate about building FPS games and delivering engaging player experiences.</p>"
+  },
+  "sections": {
+    "profiles": {
+      "title": "Profiles",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "experience": {
+      "title": "Experience",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "n2q3ckbljaffxg2wf9n3ouek",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": true
+          },
+          "company": "Digital Data Center",
+          "position": "Backend Developer III",
+          "location": "Ha Noi, Vietnam",
+          "period": "Oct 2024 - Oct 2025",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<ul><li><p>Developed backend services and APIs using <strong>FastAPI</strong> and <strong>PostgreSQL</strong> for scalable online applications.</p></li><li><p>Maintained production systems with <strong>Kubernetes</strong> and <strong>Docker</strong>, ensuring reliable deployments and stability.</p></li><li><p>Built CI/CD pipelines that reduced deployment time by <strong>~25%</strong> and streamlined release workflows.</p></li><li><p>Automated recurring task scheduling with <strong>Apache Airflow</strong>, reducing manual effort by <strong>~80%</strong> and improving workflow reliability.</p></li></ul><p></p>",
+          "roles": []
+        },
+        {
+          "id": "uo3xf3tfuc7wnfeji35mmjdl",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": true
+          },
+          "company": "VNG - ZingPlay Studios",
+          "position": "Software Engineer",
+          "location": "Ha Noi, Vietnam",
+          "period": "Nov 2020 - Sep 2024",
+          "website": {
+            "url": "https://www.vng.com.vn/",
+            "label": ""
+          },
+          "description": "<ul><li><p>Developed and maintained <strong>core game systems</strong> and <strong>online features</strong> for large-scale online titles.</p></li><li><p>Built and supported <strong>metagame systems</strong>, including events, gameplay features, shop flows, and payment-related features.</p></li><li><p>Reduced client crash rate by <strong>25%</strong> through debugging, root-cause analysis, and fixes for recurring live issues.</p></li><li><p>Built internal tools for <strong>game operations</strong>, workflow automation, and metric visualization, reducing manual.</p></li><li><p>Collaborated with cross-functional teams to support live game operations, feature delivery, and product stability.</p></li></ul><p></p>",
+          "roles": []
+        }
+      ]
+    },
+    "education": {
+      "title": "Education",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "d18tqq51bccq70tnkol14h7y",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": false
+          },
+          "school": "University of Engineering and Technology (Vietnam National University)",
+          "degree": "Bachelor",
+          "area": "Software Engineering",
+          "grade": "",
+          "location": "",
+          "period": "Aug 2018 - Dec 2023",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": ""
+        }
+      ]
+    },
+    "projects": {
+      "title": "Side Projects",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019bfb06-6910-7373-ae56-50ca53939bea",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": true
+          },
+          "name": "Multiplayer Shooting Game",
+          "period": "Oct 2025 - March 2026",
+          "website": {
+            "url": "https://github.com/FCBTruong/fps-zombie-multiplayer/",
+            "label": "Github"
+          },
+          "description": "<p>Tech: <strong>Unreal Engine 5, C++, C#, .NET Core, AWS</strong></p><ul><li><p>Built a <strong>multiplayer FPS prototype</strong> with server-authoritative architecture and dedicated server deployment.</p></li><li><p>Developed a <strong>backend match service</strong> to manage <strong>player sessions</strong> and support <strong>online match flow</strong>.</p></li><li><p>Integrated <strong>Amazon GameLift</strong> and <strong>AWS-hosted services</strong> for session orchestration and match server provisioning.</p></li></ul><p></p>"
+        },
+        {
+          "id": "eslyp363shq852h1gcd6nemt",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": true
+          },
+          "name": "Turn-based Multiplayer Card Game",
+          "period": "Dec 2024 - June 2025",
+          "website": {
+            "url": "https://github.com/FCBTruong/tressette",
+            "label": "Github"
+          },
+          "description": "<p>Tech: <strong>Godot, C++, Python, Docker</strong></p><ul><li><p>Built an online turn-based card game with <strong>multiplayer</strong> synchronization, match flow, and <strong>client-server</strong> gameplay logic.</p></li><li><p>Developed <strong>server-side networking</strong> in <strong>C++ with Asio</strong> for <strong>concurrent real-time communication</strong>, using <strong>Protocol Buffers</strong> to optimize messaging.</p></li><li><p>Integrated <strong>payment </strong>(PayPal, Google Pay, Apple Pay) and purchase-related flows to support in-game monetization and online game operations.</p></li></ul><p></p>"
+        }
+      ]
+    },
+    "skills": {
+      "title": "Skills",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "languages": {
+      "title": "Languages",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "interests": {
+      "title": "Interests",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "awards": {
+      "title": "Awards",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "certifications": {
+      "title": "Certifications",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "jkrbtymnlzlier3wgmpfznhd",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": false
+          },
+          "title": "IELTS 7.5",
+          "issuer": "British Council",
+          "date": "2025",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<p></p>"
+        }
+      ]
+    },
+    "publications": {
+      "title": "Publications",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "volunteer": {
+      "title": "Volunteering",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "references": {
+      "title": "References",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    }
+  },
+  "customSections": [
+    {
+      "title": "Tech Stack",
+      "columns": 2,
+      "hidden": false,
+      "id": "r4hb72ny8s4868o7m8h2462y",
+      "type": "experience",
+      "items": [
+        {
+          "id": "qlgc9dwyetdt8v7h3v6nm3z7",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": false
+          },
+          "company": "Programming",
+          "position": "",
+          "location": "",
+          "period": "",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<p>C++, Python, C#</p>",
+          "roles": []
+        },
+        {
+          "id": "019d2797-768a-76d2-aaab-80f597f858de",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": false
+          },
+          "company": "Networking / Backend",
+          "position": "",
+          "location": "",
+          "period": "",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<p>WebSocket, TCP/UDP, REST APIs, .NET Core</p>",
+          "roles": []
+        },
+        {
+          "id": "w2ut0f2gorm5izxvjn7fj9be",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": false
+          },
+          "company": "Game Engines",
+          "position": "",
+          "location": "",
+          "period": "",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<p>Unreal Engine 5, Cocos, Godot, Unity</p>",
+          "roles": []
+        },
+        {
+          "id": "019d279c-983c-76cd-8e91-82d899663ebb",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": false
+          },
+          "company": "Databases",
+          "position": "",
+          "location": "",
+          "period": "",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<p>PostgreSQL, MongoDB, SQL</p>",
+          "roles": []
+        },
+        {
+          "id": "019cf3cb-c797-723c-96e2-a30933f5eb72",
+          "hidden": false,
+          "options": {
+            "showLinkInTitle": false
+          },
+          "company": "Development / Deployment",
+          "position": "",
+          "location": "",
+          "period": "",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<p>Git, Docker, Kubernetes, AWS, Jenkins, Argo CD, Airflow</p>",
+          "roles": []
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "template": "onyx",
+    "layout": {
+      "sidebarWidth": 10,
+      "pages": [
+        {
+          "fullWidth": false,
+          "main": [
+            "summary",
+            "profiles",
+            "experience",
+            "projects",
+            "r4hb72ny8s4868o7m8h2462y",
+            "education",
+            "certifications",
+            "volunteer",
+            "references",
+            "skills",
+            "awards",
+            "publications",
+            "languages",
+            "interests"
+          ],
+          "sidebar": []
+        }
+      ]
+    },
+    "css": {
+      "enabled": false,
+      "value": "* {\n\toutline: 1px solid #000;\n\toutline-offset: 4px;\n}"
+    },
+    "page": {
+      "gapX": 5,
+      "gapY": 5,
+      "marginX": 10,
+      "marginY": 10,
+      "format": "a4",
+      "locale": "en-US",
+      "hideIcons": false
+    },
+    "design": {
+      "level": {
+        "icon": "star",
+        "type": "circle"
+      },
+      "colors": {
+        "primary": "rgba(82, 82, 82, 1)",
+        "text": "rgba(0, 0, 0, 1)",
+        "background": "rgba(255, 255, 255, 1)"
+      }
+    },
+    "typography": {
+      "body": {
+        "fontFamily": "IBM Plex Serif",
+        "fontWeights": [
+          "400",
+          "400",
+          "600"
+        ],
+        "fontSize": 10.5,
+        "lineHeight": 1.5
+      },
+      "heading": {
+        "fontFamily": "IBM Plex Serif",
+        "fontWeights": [
+          "600"
+        ],
+        "fontSize": 13.5,
+        "lineHeight": 1.5
+      }
+    },
+    "notes": ""
+  }
+}
