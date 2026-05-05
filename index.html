@@ -5,6 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/my-portfolio/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Truong | Software Engineer</title>
+    <script>
+      (function (location) {
+        if (!location.search.startsWith("?/")) return;
+
+        const decoded = location.search
+          .slice(1)
+          .split("&")
+          .map((segment) => segment.replace(/~and~/g, "&"))
+          .join("?");
+
+        window.history.replaceState(null, "", `${location.pathname.slice(0, -1)}${decoded}${location.hash}`);
+      })(window.location);
+    </script>
     <script type="module" crossorigin src="/my-portfolio/assets/index-Dme6tqQb.js"></script>
     <link rel="stylesheet" crossorigin href="/my-portfolio/assets/index-D4FuVTKW.css">
   </head>
